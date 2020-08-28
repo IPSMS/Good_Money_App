@@ -1,10 +1,14 @@
 class User < ApplicationRecord
     has_secure_password
 
+    validates :username, uniqueness: { case_sensitive: false }
+
     has_many :stats
     has_many :action_infos
 
     # self referencing relationship
-    has_many :friendships
-    has_many :friends, through: :friendships
+    has_many :followers, foreign_key: :follower_id , class_name: "Friendship"
+    has_many :followed, through: :followers
+    has_many :followed, foreign_key: :followed_id, class_name: "Friendship"
+    has_many :followers, through: :followed
 end
