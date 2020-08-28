@@ -8,12 +8,13 @@ const useStyles = makeStyles((theme) => ({
   button: {
     color: "white",
     borderRadius: "50%",
-    width: "600px",
-    height: "600px",
-    fontSize: "80px",
-    fontFamily: "Rowdies",
-    filter: "drop-shadow(0px 5px 15px #7e7e7e)",
-    border: "10px solid #7ead5e",
+    width: "400px",
+    height: "400px",
+    fontSize: "40px",
+    fontFamily: "Roboto",
+    fontWeight: "bold",
+    filter: "drop-shadow(3px 7px 8px #7e7e7e)",
+    border: "15px solid #00a015",
     "&:hover": {
       border: "10px solid #599634",
     },
@@ -25,8 +26,8 @@ export default function CompleteButton() {
 
   return (
     
-    <Button variant="contained" color="primary" className={classes.button}>
-      
+    <Button variant="contained" color="secondary" className={classes.button} onClick={()=>{console.log('MAKE DOLLAS')}}>
+      COMPLETE!
     </Button>
       
   );
