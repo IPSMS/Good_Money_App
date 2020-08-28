@@ -7,5 +7,5 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 tod = User.create(first_name: 'tod', password: 'password123')
-greg = User.create(first_name: 'greg', password: 'password123')
-f1 = Friendship.create(user_id: tod.id, friend_id: greg.id)
+greg = User.create(first_name: 'greg', password: 'password123', username: 'greeeegg')
+# f1 = Friendship.create(user_id: tod.id, friend_id: greg.id)
