@@ -60,28 +60,67 @@ export default function Signup() {
             SIGN UP:
         </Typography>
         <Box className="formInputs" >
+
+            <TextField
+            id="standard-full-width"
+            label="Enter First Name:"
+            style={{ margin: 8 }}
+            placeholder="Enter First Name"
+            fullWidth
+            margin="normal"
+            InputLabelProps={{
+                shrink: true,
+            }}
+            />
+
+            <TextField
+            id="standard-full-width"
+            label="Last Name:"
+            style={{ margin: 8 }}
+            placeholder="Enter Last Name"
+            fullWidth
+            margin="normal"
+            InputLabelProps={{
+                shrink: true,
+            }}
+            />
+
             <TextField
             id="standard-full-width"
             label="Username:"
             style={{ margin: 8 }}
-            placeholder="Username"
+            placeholder="Enter Username"
             fullWidth
             margin="normal"
             InputLabelProps={{
                 shrink: true,
             }}
             />
+
             <TextField
             id="standard-full-width"
             label="Password:"
             style={{ margin: 8 }}
-            placeholder="Password"
+            placeholder="Enter Password"
             fullWidth
             margin="normal"
             InputLabelProps={{
                 shrink: true,
             }}
             />
+
+            <TextField
+            id="standard-full-width"
+            label="Password Confirmation:"
+            style={{ margin: 8 }}
+            placeholder="Enter Password Confirmation"
+            fullWidth
+            margin="normal"
+            InputLabelProps={{
+                shrink: true,
+            }}
+            />
+
             <Button 
                 variant="contained" 
                 color="secondary" 
@@ -90,7 +129,8 @@ export default function Signup() {
                 onClick={()=>{ console.log('WINNER!')}}
             >
                 SUBMIT
-            </Button>                                       
+            </Button>  
+
         </Box>
 
     </Container>
