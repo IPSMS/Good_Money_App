@@ -1,4 +1,5 @@
 import React from "react";
+import LogoutButton from "./LogoutButton";
 
 // Material UI imports
 import { makeStyles } from "@material-ui/core/styles";
@@ -63,6 +64,9 @@ export default function AppBar() {
           </div>
           <div>
             <Grid container alignItems="center" spacing={3}>
+              <Grid item>
+                <LogoutButton />
+              </Grid>
               <Grid item>
                 <IconButton
                   edge="end"
