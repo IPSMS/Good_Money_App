@@ -2,7 +2,7 @@ import React from "react";
 import "../App.css";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
-// import Signup from "../pages/Signup";
+import Signup from "../pages/Signup";
 import {
   BrowserRouter as Router,
   Switch,
@@ -18,28 +18,25 @@ export default function App() {
   return (
 
     <Router>
-
-      <div>
-      <ThemeProvider theme={theme}>
-        <Login />
-      </ThemeProvider>
-        
-
-      </div>
-      <Switch>
-          
+        <Switch>
+            <Route exact path="/">
+              <ThemeProvider theme={theme}>
+                <Login />
+              </ThemeProvider>
+            </Route>
             <Route path="/home">
               <ThemeProvider theme={theme}>
                 <Home />
               </ThemeProvider>
             </Route>
-            {/* <Route path="/signup">
-              <Signup />
-            </Route> */}
+            <Route path="/signup">
+              <ThemeProvider theme={theme}>
+                <Signup />
+              </ThemeProvider>
+            </Route>
           
         </Switch>
     </Router>
     
   );
 }
-
