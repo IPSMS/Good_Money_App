@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   resources :action_infos
-  resources :actions
   resources :stats
   resources :users
     post '/login', to: 'auth#login'

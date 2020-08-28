@@ -84,6 +84,7 @@ export default function Signup() {
       .then((res) => res.json())
       .then((data) => {
         if (data.jwt) {
+          console.log(data);
           localStorage.jwt = data.jwt;
           localStorage.username = data.user.username;
           localStorage.id = data.user.id;
