@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import AppBar from "../components/AppBar";
 import CompleteButton from "../components/CompleteButton";
 import { Link } from "react-router-dom";
@@ -78,7 +78,6 @@ export default function Login() {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.jwt) {
           localStorage.jwt = data.jwt;
           localStorage.username = data.user.username;
