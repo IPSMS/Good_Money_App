@@ -25,10 +25,15 @@ export default function CompleteButton() {
   const classes = useStyles();
 
   return (
-    
-    <Button variant="contained" color="secondary" className={classes.button} onClick={()=>{console.log('MAKE DOLLAS')}}>
+    <Button
+      variant="contained"
+      color="secondary"
+      className={classes.button}
+      onClick={() => {
+        console.log("MAKE DOLLAS");
+      }}
+    >
       COMPLETE!
     </Button>
-      
   );
 }

@@ -6,20 +6,20 @@ import CompleteButton from "../components/CompleteButton";
 import { makeStyles } from "@material-ui/core/styles";
 
 // Material UI imports
-import {Grid, Typography, Box, Container} from "@material-ui/core/";
+import { Grid, Typography, Box, Container } from "@material-ui/core/";
 
 // Styles Object
 const useStyles = makeStyles((theme) => ({
   buttonContainer: {
     marginTop: "5rem",
-    textAlign: 'center'
+    textAlign: "center",
   },
   dailyTotal: {
-    fontWeight: 'bold',
-    textAlign: 'center',
-    fontSize: '60px',
+    fontWeight: "bold",
+    textAlign: "center",
+    fontSize: "60px",
     color: "#00D01B",
-    marginBottom: "3.5rem"
+    marginBottom: "3.5rem",
   },
   grandTotalBox: {
     display: "inline-block",
@@ -28,21 +28,20 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "1rem",
     width: "10rem",
     fontSize: "1.5rem",
-    color: "#5f5b5b"
+    color: "#5f5b5b",
   },
   grandTotalTitle: {
     fontWeight: "bold",
-    color: "#676767"
-
+    color: "#676767",
   },
   grandTotalWrapper: {
     textAlign: "center",
-    marginTop: "3rem"
+    marginTop: "3rem",
   },
   dailyTotalHeading: {
     fontWeight: "bold",
-    marginBottom: "1.5rem"
-  }
+    marginBottom: "1.5rem",
+  },
 }));
 
 export default function Home() {
@@ -53,24 +52,24 @@ export default function Home() {
     <Grid container direction="column" justify="center">
       <AppBar />
       <Grid item md={12} justify="center" className={classes.grandTotalWrapper}>
-
-            <Typography variant="h5" className={classes.grandTotalTitle}>
-              GRAND TOTAL:
-            </Typography>
-            <Box className={classes.grandTotalBox}>
-              <span>$400</span>
-            </Box>
-         
+        <Typography variant="h5" className={classes.grandTotalTitle}>
+          GRAND TOTAL:
+        </Typography>
+        <Box className={classes.grandTotalBox}>
+          <span>$400</span>
+        </Box>
       </Grid>
       <Grid item md={12} className={classes.buttonContainer}>
-        <Typography variant="h3" className={classes.dailyTotalHeading}>DAILY EARNINGS:</Typography>
+        <Typography variant="h3" className={classes.dailyTotalHeading}>
+          DAILY EARNINGS:
+        </Typography>
 
-        <Typography variant="h4" className={classes.dailyTotal}>$98</Typography>
-      
+        <Typography variant="h4" className={classes.dailyTotal}>
+          $98
+        </Typography>
+
         <CompleteButton />
-
       </Grid>
-        
     </Grid>
   );
 }
