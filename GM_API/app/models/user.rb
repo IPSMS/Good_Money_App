@@ -38,6 +38,8 @@ class User < ApplicationRecord
             self.stats.each do |stat|
                 if stat.created_at.strftime("%m-%d-%Y") == DateTime.current.to_date.strftime("%m-%d-%Y")
                     total += stat.action_amount
+                else
+                    total = 0
             end
         end
                 return total
