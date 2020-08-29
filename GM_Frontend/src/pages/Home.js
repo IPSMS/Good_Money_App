@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import AppBar from "../components/AppBar";
 import CompleteButton from "../components/CompleteButton";
 
@@ -47,6 +47,28 @@ const useStyles = makeStyles((theme) => ({
 export default function Home() {
   // Variable to enable ease of use of stlyes object
   const classes = useStyles();
+  const [userTotal, setUserTotal] = useState("");
+  const [userDailyTotal, setUserDailyTotal] = useState("");
+
+  fetch("http://localhost:3000/usertotal/:id", {
+    headers: {
+      Authorization: `Bearer ${localStorage.jwt}`,
+    },
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      setUserTotal(data);
+    });
+
+  fetch("http://localhost:3000/userdailytotal/:id", {
+    headers: {
+      Authorization: `Bearer ${localStorage.jwt}`,
+    },
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      setUserDailyTotal(data);
+    });
 
   return (
     <Grid container direction="column" justify="center">
@@ -56,7 +78,7 @@ export default function Home() {
           GRAND TOTAL:
         </Typography>
         <Box className={classes.grandTotalBox}>
-          <span>$400</span>
+          <span>{"$" + userTotal}</span>
         </Box>
       </Grid>
       <Grid item md={12} className={classes.buttonContainer}>
@@ -65,7 +87,7 @@ export default function Home() {
         </Typography>
 
         <Typography variant="h4" className={classes.dailyTotal}>
-          $98
+          {"$" + userDailyTotal}
         </Typography>
 
         <CompleteButton />
