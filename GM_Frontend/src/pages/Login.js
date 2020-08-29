@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import AppBar from "../components/AppBar";
 import CompleteButton from "../components/CompleteButton";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 // To create the styles object
 import { makeStyles } from "@material-ui/core/styles";
@@ -60,6 +60,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Login() {
   // Variable to enable ease of use of stlyes object
   const classes = useStyles();
+  let history = useHistory();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -82,10 +83,8 @@ export default function Login() {
           localStorage.jwt = data.jwt;
           localStorage.username = data.user.username;
           localStorage.id = data.user.id;
-          // GET USER PROFILE
-          // this.props.getProfile();
-          // PUSH TO THE PROFILE ROUTE
-          // this.props.history.push("/profile");
+          // PUSH TO THE HOME ROUTE
+          history.push("/home");
         }
       });
   };
