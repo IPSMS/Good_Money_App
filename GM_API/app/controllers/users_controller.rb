@@ -46,10 +46,10 @@ class UsersController < ApplicationController
   end
 
    # ***will calculate daily total
-  # def user_daily_total
+  def daily_total
     
-  #   render json: @user.daily_total
-  # end
+    render json: @user.daily_total
+  end
 
 
   private

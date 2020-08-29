@@ -21,7 +21,7 @@ class User < ApplicationRecord
     def total
         total = 0
         if self.stats.length <= 0
-            return 0
+            return total
         else
             self.stats.each do |stat|
                 total += stat.action_amount
@@ -29,4 +29,18 @@ class User < ApplicationRecord
                 return total
         end
     end
+
+    def daily_total
+        total = 0
+        if self.stats.length <= 0
+            return total
+        else
+            self.stats.each do |stat|
+                if stat.created_at.strftime("%m-%d-%Y") == DateTime.current.to_date.strftime("%m-%d-%Y")
+                    total += stat.action_amount
+            end
+        end
+                return total
+    end
+end
 end
