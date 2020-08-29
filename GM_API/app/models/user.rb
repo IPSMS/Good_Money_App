@@ -14,4 +14,19 @@ class User < ApplicationRecord
     has_many :followed, through: :followers
     has_many :followed, foreign_key: :followed_id, class_name: "Friendship"
     has_many :followers, through: :followed
+
+
+    # Helper Methods 
+
+    def total
+        total = 0
+        if self.stats.length <= 0
+            return 0
+        else
+            self.stats.each do |stat|
+                total += stat.action_amount
+            end
+                return total
+        end
+    end
 end
