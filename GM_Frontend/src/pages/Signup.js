@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 // To create the styles object
 import { makeStyles } from "@material-ui/core/styles";
@@ -58,6 +58,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Signup() {
   // Variable to enable ease of use of stlyes object
   const classes = useStyles();
+  const history = useHistory();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [username, setUsername] = useState("");
@@ -88,10 +89,8 @@ export default function Signup() {
           localStorage.jwt = data.jwt;
           localStorage.username = data.user.username;
           localStorage.id = data.user.id;
-          // GET USER PROFILE
-          // this.props.getProfile();
-          // PUSH TO THE PROFILE ROUTE
-          // this.props.history.push("/profile");
+          // PUSH TO THE HOME ROUTE
+          history.push("/home");
         }
       });
   };

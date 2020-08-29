@@ -3,6 +3,7 @@ import React from "react";
 // Material ui imports
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
+import { getThemeProps } from "@material-ui/styles";
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -21,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CompleteButton() {
+export default function CompleteButton(props) {
   const classes = useStyles();
 
   // CREATES A STAT FOR CURRENT USER
@@ -39,8 +40,11 @@ export default function CompleteButton() {
       }),
     })
       .then((res) => res.json())
-      .then((user) => {
-        console.log(user);
+      .then((data) => {
+        console.log(data);
+        if (!data.error) {
+          props.setUserDailyTotal(props.userDailyTotal + 1);
+        }
       });
   };
 
