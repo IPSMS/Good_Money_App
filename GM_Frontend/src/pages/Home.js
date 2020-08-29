@@ -47,8 +47,8 @@ const useStyles = makeStyles((theme) => ({
 export default function Home() {
   // Variable to enable ease of use of stlyes object
   const classes = useStyles();
-  const [userTotal, setUserTotal] = useState("");
-  const [userDailyTotal, setUserDailyTotal] = useState("");
+  const [userTotal, setUserTotal] = useState(0);
+  const [userDailyTotal, setUserDailyTotal] = useState(0);
 
   fetch("http://localhost:3000/usertotal/:id", {
     headers: {
@@ -90,7 +90,10 @@ export default function Home() {
           {"$" + userDailyTotal}
         </Typography>
 
-        <CompleteButton />
+        <CompleteButton
+          setUserDailyTotal={setUserDailyTotal}
+          userDailyTotal={userDailyTotal}
+        />
       </Grid>
     </Grid>
   );
