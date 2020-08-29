@@ -9,12 +9,7 @@ class UsersController < ApplicationController
 
   def profile
     # render json: current_user, include: [:followed, :followers]
-    render json: current_user
-  end
-
-  def show
-    # render json: @user, include: [:followed, :followers]
-    render json: current_user
+    render json: current_user, include: [:stats, :action_infos]
   end
 
   def create
@@ -40,16 +35,16 @@ class UsersController < ApplicationController
   end
 
   # ***will calculate total
-  # def user_total
+  def user_total
     
-  #   render json: @user.total
-  # end
+    render json: @user.total
+  end
 
    # ***will calculate daily total
-  # def user_daily_total
+  def user_daily_total
     
-  #   render json: @user.daily_total
-  # end
+    render json: @user.daily_total
+  end
 
 
   private

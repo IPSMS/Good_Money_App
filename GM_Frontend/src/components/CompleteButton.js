@@ -24,14 +24,32 @@ const useStyles = makeStyles((theme) => ({
 export default function CompleteButton() {
   const classes = useStyles();
 
+  // CREATES A STAT FOR CURRENT USER
+  const handleClick = () => {
+    fetch("http://localhost:3000/stats", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.jwt}`,
+      },
+      body: JSON.stringify({
+        action_amount: 1,
+        user_id: localStorage.id,
+      }),
+    })
+      .then((res) => res.json())
+      .then((user) => {
+        console.log(user);
+      });
+  };
+
   return (
     <Button
       variant="contained"
       color="secondary"
       className={classes.button}
-      onClick={() => {
-        console.log("MAKE DOLLAS");
-      }}
+      onClick={handleClick}
     >
       COMPLETE!
     </Button>
