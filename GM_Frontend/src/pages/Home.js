@@ -49,6 +49,19 @@ export default function Home() {
   const classes = useStyles();
   const [userTotal, setUserTotal] = useState(0);
   const [userDailyTotal, setUserDailyTotal] = useState(0);
+  const [userName, setUserName] = useState("");
+
+  fetch("http://localhost:3000/profile", {
+    headers: {
+      Authorization: `Bearer ${localStorage.jwt}`,
+    },
+  })
+    .then((res) => res.json())
+    .then((user) => {
+      if (!user.error) {
+        setUserName(user.username);
+      }
+    });
 
   fetch("http://localhost:3000/usertotal/:id", {
     headers: {
@@ -72,7 +85,7 @@ export default function Home() {
 
   return (
     <Grid container direction="column" justify="center">
-      <AppBar />
+      <AppBar userName={userName} />
       <Grid item md={12} justify="center" className={classes.grandTotalWrapper}>
         <Typography variant="h5" className={classes.grandTotalTitle}>
           GRAND TOTAL:
