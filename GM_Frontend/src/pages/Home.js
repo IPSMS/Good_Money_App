@@ -8,6 +8,9 @@ import { makeStyles } from "@material-ui/core/styles";
 // Material UI imports
 import { Grid, Typography, Box, Container } from "@material-ui/core/";
 
+// Router
+import { Redirect } from "react-router-dom";
+
 // Styles Object
 const useStyles = makeStyles((theme) => ({
   buttonContainer: {
@@ -82,6 +85,10 @@ export default function Home() {
     .then((data) => {
       setUserDailyTotal(data);
     });
+
+  if( !userName ){
+    return <Redirect to="/" />
+  }
 
   return (
     <Grid container direction="column" justify="center">
