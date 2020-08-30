@@ -90,7 +90,7 @@ export default function Signup() {
           localStorage.username = data.user.username;
           localStorage.id = data.user.id;
           // PUSH TO THE HOME ROUTE
-          history.push("/home");
+          window.location.reload();
         }
       });
   };
@@ -101,92 +101,96 @@ export default function Signup() {
         SIGN UP:
       </Typography>
       <Box className="formInputs">
-        <TextField
-          id="standard-full-width"
-          label="First Name:"
-          style={{ margin: 8 }}
-          placeholder="Enter First Name"
-          fullWidth
-          margin="normal"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          onChange={(e) => {
-            setFirstName(e.target.value);
-          }}
-        />
+        <form onSubmit={handleSubmit}>
+          <TextField
+            id="standard-full-width"
+            label="First Name:"
+            style={{ margin: 8 }}
+            placeholder="Enter First Name"
+            fullWidth
+            margin="normal"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            onChange={(e) => {
+              setFirstName(e.target.value);
+            }}
+          />
 
-        <TextField
-          id="standard-full-width"
-          label="Last Name:"
-          style={{ margin: 8 }}
-          placeholder="Enter Last Name"
-          fullWidth
-          margin="normal"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          onChange={(e) => {
-            setLastName(e.target.value);
-          }}
-        />
+          <TextField
+            id="standard-full-width"
+            label="Last Name:"
+            style={{ margin: 8 }}
+            placeholder="Enter Last Name"
+            fullWidth
+            margin="normal"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            onChange={(e) => {
+              setLastName(e.target.value);
+            }}
+          />
 
-        <TextField
-          id="standard-full-width"
-          label="Username:"
-          style={{ margin: 8 }}
-          placeholder="Enter Username"
-          fullWidth
-          margin="normal"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          onChange={(e) => {
-            setUsername(e.target.value);
-          }}
-        />
+          <TextField
+            id="standard-full-width"
+            label="Username:"
+            style={{ margin: 8 }}
+            placeholder="Enter Username"
+            fullWidth
+            margin="normal"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            onChange={(e) => {
+              setUsername(e.target.value);
+            }}
+          />
 
-        <TextField
-          id="standard-full-width"
-          label="Password:"
-          type="password"
-          style={{ margin: 8 }}
-          placeholder="Enter Password"
-          fullWidth
-          margin="normal"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-        />
+          <TextField
+            id="standard-full-width"
+            label="Password:"
+            type="password"
+            style={{ margin: 8 }}
+            placeholder="Enter Password"
+            fullWidth
+            margin="normal"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+          />
 
-        <TextField
-          id="standard-full-width"
-          label="Password Confirmation:"
-          type="password"
-          style={{ margin: 8 }}
-          placeholder="Enter Password Confirmation"
-          fullWidth
-          margin="normal"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          onChange={(e) => {
-            setPasswordConfirmation(e.target.value);
-          }}
-        />
+          <TextField
+            id="standard-full-width"
+            label="Password Confirmation:"
+            type="password"
+            style={{ margin: 8 }}
+            placeholder="Enter Password Confirmation"
+            fullWidth
+            margin="normal"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            onChange={(e) => {
+              setPasswordConfirmation(e.target.value);
+            }}
+          />
 
-        <Button
-          variant="contained"
-          color="secondary"
-          className={classes.formInputs__submit}
-          size="large"
-          onClick={handleSubmit}
-        >
-          SUBMIT
-        </Button>
+          <Button
+            variant="contained"
+            color="secondary"
+            className={classes.formInputs__submit}
+            size="large"
+            type="submit"
+          >
+            SUBMIT
+          </Button>
+
+        </form>
+        
       </Box>
     </Container>
   );

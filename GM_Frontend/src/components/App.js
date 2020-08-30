@@ -29,8 +29,9 @@ export default function App() {
 
         </Route>
         <Route path="/signup">
-          
-            <Signup />
+
+          { userIsAuthorized ? <Home /> : <Signup /> } 
+            
           
         </Route>
       </Switch>
