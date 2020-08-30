@@ -14,6 +14,7 @@ import {
   TextField,
   Button,
   Box,
+  FormControl
 } from "@material-ui/core";
 
 // Styles Object
@@ -96,43 +97,46 @@ export default function Login() {
         LOGIN:
       </Typography>
       <Box className="formInputs">
-        <TextField
-          id="standard-full-width"
-          label="Username:"
-          style={{ margin: 8 }}
-          placeholder="Username"
-          fullWidth
-          margin="normal"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          onChange={(e) => {
-            setUsername(e.target.value);
-          }}
-        />
-        <TextField
-          id="standard-full-width"
-          label="Password:"
-          style={{ margin: 8 }}
-          placeholder="Password"
-          fullWidth
-          margin="normal"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-        />
-        <Button
-          variant="contained"
-          color="secondary"
-          className={classes.formInputs__submit}
-          size="large"
-          onClick={handleSubmit}
-        >
-          SUBMIT
-        </Button>
+        <form onSubmit={handleSubmit} >
+          <TextField
+            id="standard-full-width"
+            label="Username:"
+            style={{ margin: 8 }}
+            placeholder="Username"
+            fullWidth
+            margin="normal"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            onChange={(e) => {
+              setUsername(e.target.value);
+            }}
+          />
+          <TextField
+            id="standard-full-width"
+            label="Password:"
+            style={{ margin: 8 }}
+            type="password"
+            placeholder="Password"
+            fullWidth
+            margin="normal"
+            InputLabelProps={{
+              shrink: true,
+            }}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+          />
+          <Button
+            variant="contained"
+            color="secondary"
+            className={classes.formInputs__submit}
+            size="large"
+            type="submit"
+          >
+            SUBMIT
+          </Button>
+        </form>
       </Box>
 
       <Box className={classes.signupContainer}>
