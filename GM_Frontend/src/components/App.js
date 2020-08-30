@@ -1,17 +1,41 @@
-import React from "react";
+import React, {useState} from "react";
 import "../App.css";
 import Home from "../pages/Home";
+import Login from "../pages/Login";
+import Signup from "../pages/Signup";
+import { BrowserRouter as Redirect, Switch, Route, Link } from "react-router-dom";
 
-// Material UI's theme provider to add the theme throughout entire application
-import { ThemeProvider } from "@material-ui/styles";
-import theme from "./ui/Theme";
+export default function App() {
 
-function App() {
+  const [userIsAuthorized, setUserIsAuthorized] = useState(false);
+
+  fetch("http://localhost:3000/profile", {
+    headers: {
+      Authorization: `Bearer ${localStorage.jwt}`,
+    },
+  })
+    .then((res) => res.json())
+    .then((user) => {
+      if (!user.error) {
+        setUserIsAuthorized(true);
+      }
+    });
+  
   return (
-    <ThemeProvider theme={theme}>
-      <Home />
-    </ThemeProvider>
-  );
-}
+      <Switch>
+        <Route exact path="/">
+          
+            { userIsAuthorized ? <Home /> : <Login /> } 
 
-export default App;
+        </Route>
+        <Route path="/signup">
+
+          { userIsAuthorized ? <Home /> : <Signup /> } 
+            
+          
+        </Route>
+      </Switch>
+  );
+  
+  
+}

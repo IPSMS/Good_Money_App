@@ -1,7 +1,7 @@
 class AuthController < ApplicationController
-    skip_before_action :authorized, only: [:create]
+    skip_before_action :authorized, only: [:login]
  
-    def create
+    def login
       @user = User.find_by(username: user_login_params[:username])
       
       if @user && @user.authenticate(user_login_params[:password])
@@ -16,6 +16,6 @@ class AuthController < ApplicationController
     private
    
     def user_login_params
-        params.permit(:username, :first_name, :last_name, :email, :phone, :location, :password)    
+        params.permit(:username, :first_name, :last_name, :email, :phone, :location, :password, :password_confirmation)    
     end
 end

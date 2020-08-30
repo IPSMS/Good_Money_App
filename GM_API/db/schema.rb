@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_27_005450) do
+ActiveRecord::Schema.define(version: 2020_08_30_043424) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,7 +19,6 @@ ActiveRecord::Schema.define(version: 2020_08_27_005450) do
     t.string "name"
     t.integer "amount"
     t.bigint "user_id"
-    t.bigint "stat_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "sunday"
@@ -29,7 +28,6 @@ ActiveRecord::Schema.define(version: 2020_08_27_005450) do
     t.boolean "thursday"
     t.boolean "friday"
     t.boolean "saturday"
-    t.index ["stat_id"], name: "index_action_infos_on_stat_id"
     t.index ["user_id"], name: "index_action_infos_on_user_id"
   end
 
@@ -41,10 +39,10 @@ ActiveRecord::Schema.define(version: 2020_08_27_005450) do
   create_table "stats", force: :cascade do |t|
     t.string "action_name"
     t.integer "action_amount"
-    t.datetime "logged_time"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "logged_time"
     t.index ["user_id"], name: "index_stats_on_user_id"
   end
 
@@ -60,7 +58,6 @@ ActiveRecord::Schema.define(version: 2020_08_27_005450) do
     t.string "username"
   end
 
-  add_foreign_key "action_infos", "stats"
   add_foreign_key "action_infos", "users"
   add_foreign_key "stats", "users"
 end
