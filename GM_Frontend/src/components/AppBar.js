@@ -14,6 +14,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MailIcon from "@material-ui/icons/Mail";
+import { getThemeProps } from "@material-ui/styles";
 
 // Styles object
 const useStyles = makeStyles((theme) => ({
@@ -31,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function AppBar() {
+export default function AppBar(props) {
   const classes = useStyles();
 
   return (
@@ -96,7 +97,7 @@ export default function AppBar() {
                 <Grid container alignItems="center">
                   <Grid item>
                     <Typography variant="h6" className={classes.userName}>
-                      Bobby BuffaloBoy
+                      {props.userName}
                     </Typography>
                   </Grid>
                   <Grid item>
