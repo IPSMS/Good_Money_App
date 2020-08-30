@@ -16,7 +16,7 @@ class ActionInfosController < ApplicationController
   # POST /action_infos
   def create
     @action_info = ActionInfo.new(action_info_params)
-
+    
     if @action_info.save
       render json: @action_info, status: :created, location: @action_info
     else
@@ -46,6 +46,6 @@ class ActionInfosController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def action_info_params
-      params.require(:action_info).permit(:name, :amount, :user_id, :stat_id)
+      params.permit(:name, :amount, :user_id)
     end
 end
