@@ -84,7 +84,8 @@ export default function Login() {
           localStorage.username = data.user.username;
           localStorage.id = data.user.id;
           // PUSH TO THE HOME ROUTE
-          history.push("/home");
+         
+          window.location.reload();
         }
       });
   };
