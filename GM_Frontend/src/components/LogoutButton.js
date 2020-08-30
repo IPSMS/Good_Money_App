@@ -9,7 +9,7 @@ import { Button } from "@material-ui/core/";
 
 const useStyles = makeStyles((theme) => ({
   button: {
-    color: "white",
+    color: theme.secondary,
   },
   logoutLink: {
     textDecoration: "none",
@@ -22,7 +22,7 @@ export default function LogoutButton() {
   return (
     <Link to="/" className={classes.logoutLink}>
       <Button
-        variant="contained"
+        variant="outlined"
         color="secondary"
         className={classes.button}
         onClick={() => {
