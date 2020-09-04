@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import AppBar from "../components/AppBar";
-import CompleteButton from "../components/CompleteButton";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // To create the styles object
 import { makeStyles } from "@material-ui/core/styles";
@@ -11,13 +9,11 @@ import { client } from "../functions/client.js";
 
 // Material UI imports
 import {
-  Grid,
   Container,
   Typography,
   TextField,
   Button,
   Box,
-  FormControl
 } from "@material-ui/core";
 
 // Styles Object
@@ -38,7 +34,6 @@ const useStyles = makeStyles((theme) => ({
   formInputs__submit: {
     marginTop: "1rem",
     color: "#fff",
-    marginTop: "1rem",
     fontWeight: "bold",
   },
   signupContainer: {
@@ -64,7 +59,6 @@ const useStyles = makeStyles((theme) => ({
 export default function Login() {
   // Variable to enable ease of use of stlyes object
   const classes = useStyles();
-  let history = useHistory();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
