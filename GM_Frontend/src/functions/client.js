@@ -41,4 +41,5 @@ export function client(endpoint, {body, ...customConfig} = {}) {
 
 export function logout() {
   window.localStorage.removeItem(localStorageKey)
+  window.location.reload();
 }
