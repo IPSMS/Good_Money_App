@@ -26,13 +26,13 @@ const useStyles = makeStyles((theme) => ({
     "&:active": {
       filter: "drop-shadow(0px 10px 0px #001703)",
       transform: "translateY(4px)",
-      backgroundColor: "#00a916"
-    }
+      backgroundColor: "#00a916",
+    },
   },
 
   completeTxt: {
-    display: "block"
-  }
+    display: "block",
+  },
 }));
 
 export default function CompleteButton(props) {
@@ -49,25 +49,25 @@ export default function CompleteButton(props) {
       todayDate = "0" + date;
     }
 
+    if (todayDate[4] === "-") {
+      todayDate = todayDate.substring(0, 3) + "0" + todayDate.substring(3);
+    }
+
     const statsObj = {
       action_amount: 1,
       user_id: localStorage.id,
       logged_time: todayDate,
-    }
+    };
 
-    client('stats', {body: statsObj}).then( data => {
+    client("stats", { body: statsObj }).then((data) => {
       if (!data.error) {
         props.setUserDailyTotal(props.userDailyTotal + 1);
       }
-    } )
-
+    });
   };
 
   return (
-    <div
-      className={classes.button}
-      onClick={handleClick}
-    >
+    <div className={classes.button} onClick={handleClick}>
       <span className={classes.completeTxt}>COMPLETE!</span>
     </div>
   );
