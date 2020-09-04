@@ -30,6 +30,11 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "5%",
     width: "100%",
   },
+  appBarIcons: {
+    [theme.breakpoints.down("sm")]: {
+      display: "none",
+    },
+  },
 }));
 
 export default function AppBar(props) {
@@ -68,7 +73,7 @@ export default function AppBar(props) {
               <Grid item>
                 <LogoutButton />
               </Grid>
-              <Grid item>
+              <Grid item className={classes.appBarIcons}>
                 <IconButton
                   edge="end"
                   aria-label="account of current user"
@@ -80,7 +85,7 @@ export default function AppBar(props) {
                   <MailIcon />
                 </IconButton>
               </Grid>
-              <Grid item>
+              <Grid item className={classes.appBarIcons}>
                 <IconButton
                   edge="end"
                   aria-label="account of current user"
