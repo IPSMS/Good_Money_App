@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
 
 // To create the styles object
 import { makeStyles } from "@material-ui/core/styles";
 
 // Material UI imports
 import {
-  Grid,
   Container,
   Typography,
   TextField,
@@ -31,7 +29,6 @@ const useStyles = makeStyles((theme) => ({
     display: "inline-block",
   },
   formInputs__submit: {
-    marginTop: "1rem",
     color: "#fff",
     marginTop: "1rem",
     fontWeight: "bold",
@@ -59,7 +56,6 @@ const useStyles = makeStyles((theme) => ({
 export default function Signup() {
   // Variable to enable ease of use of stlyes object
   const classes = useStyles();
-  const history = useHistory();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [username, setUsername] = useState("");

@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useHistory, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // To create the styles object
 import { makeStyles } from "@material-ui/core/styles";
@@ -21,7 +21,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function LogoutButton() {
   const classes = useStyles();
-  const history = useHistory();
 
   return (
     <Link to="/" className={classes.logoutLink}>
