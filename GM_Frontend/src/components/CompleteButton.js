@@ -2,24 +2,34 @@ import React from "react";
 
 // Material ui imports
 import { makeStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
-import { getThemeProps } from "@material-ui/styles";
 
 const useStyles = makeStyles((theme) => ({
   button: {
     color: "white",
+    backgroundColor: theme.palette.secondary.main,
     borderRadius: "50%",
-    width: "400px",
-    height: "400px",
-    fontSize: "40px",
+    width: "300px",
+    fontSize: "2rem",
     fontFamily: "Roboto",
     fontWeight: "bold",
-    filter: "drop-shadow(3px 7px 8px #7e7e7e)",
-    border: "15px solid #00a015",
-    "&:hover": {
-      border: "10px solid #599634",
-    },
+    filter: "drop-shadow(0px 20px 0px #00690e)",
+    border: "1px solid #00a015",
+    display: "flex",
+    justifyContent: "center",
+    marginLeft: "auto",
+    marginRight: "auto",
+    alignItems: "center",
+    height: "300px",
+    "&:active": {
+      filter: "drop-shadow(0px 10px 0px #001703)",
+      transform: "translateY(4px)",
+      backgroundColor: "#00a916"
+    }
   },
+
+  completeTxt: {
+    display: "block"
+  }
 }));
 
 export default function CompleteButton(props) {
@@ -58,13 +68,11 @@ export default function CompleteButton(props) {
   };
 
   return (
-    <Button
-      variant="contained"
-      color="secondary"
+    <div
       className={classes.button}
       onClick={handleClick}
     >
-      COMPLETE!
-    </Button>
+      <span className={classes.completeTxt}>COMPLETE!</span>
+    </div>
   );
 }
