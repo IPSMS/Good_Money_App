@@ -3,15 +3,17 @@ import LogoutButton from "./LogoutButton";
 
 // Material UI imports
 import { makeStyles } from "@material-ui/core/styles";
+import {
+  Box,
+  Typography,
+  IconButton,
+  Toolbar
+} from "@material-ui/core/"
 import Appbar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Grid from "@material-ui/core/Grid";
-import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
-import MenuIcon from "@material-ui/icons/Menu";
+// import MenuIcon from "@material-ui/icons/Menu";
 import AccountCircle from "@material-ui/icons/AccountCircle";
-import NotificationsIcon from "@material-ui/icons/Notifications";
-import MailIcon from "@material-ui/icons/Mail";
+// import NotificationsIcon from "@material-ui/icons/Notifications";
+// import MailIcon from "@material-ui/icons/Mail";
 
 // Styles object
 const useStyles = makeStyles((theme) => ({
@@ -32,6 +34,11 @@ const useStyles = makeStyles((theme) => ({
       display: "none",
     },
   },
+  rightSideToolbar: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between"
+  }
 }));
 
 export default function AppBar(props) {
@@ -41,7 +48,28 @@ export default function AppBar(props) {
     <div className={classes.grow}>
       <Appbar position="static" color="white">
         <Toolbar className={classes.toolbar}>
-          <div>
+          <Typography variant="h4" noWrap className={classes.appName}>
+                  GM
+          </Typography>
+          <Box className={classes.rightSideToolbar}>
+            <Typography variant="h6" className={classes.userName}>
+              {props.userName}
+            </Typography>
+            <IconButton
+              edge="end"
+              aria-label="account of current user"
+              // aria-controls={menuId}
+              aria-haspopup="true"
+              // onClick={handleProfileMenuOpen}
+              color="primary"
+            >
+              <AccountCircle />
+            </IconButton>
+            <LogoutButton />
+          </Box>
+          
+          
+          {/* <div>
             <Grid container>
               <Grid item className={classes.appBarIcons}>
                 <IconButton
@@ -113,7 +141,7 @@ export default function AppBar(props) {
                 </Grid>
               </Grid>
             </Grid>
-          </div>
+          </div> */}
         </Toolbar>
       </Appbar>
     </div>
