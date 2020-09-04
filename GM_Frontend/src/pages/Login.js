@@ -1,20 +1,19 @@
 import React, { useState } from "react";
-import AppBar from "../components/AppBar";
-import CompleteButton from "../components/CompleteButton";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // To create the styles object
 import { makeStyles } from "@material-ui/core/styles";
 
+// Utils
+import { client } from "../functions/client.js";
+
 // Material UI imports
 import {
-  Grid,
   Container,
   Typography,
   TextField,
   Button,
   Box,
-  FormControl
 } from "@material-ui/core";
 
 // Styles Object
@@ -35,7 +34,6 @@ const useStyles = makeStyles((theme) => ({
   formInputs__submit: {
     marginTop: "1rem",
     color: "#fff",
-    marginTop: "1rem",
     fontWeight: "bold",
   },
   signupContainer: {
@@ -61,34 +59,29 @@ const useStyles = makeStyles((theme) => ({
 export default function Login() {
   // Variable to enable ease of use of stlyes object
   const classes = useStyles();
-  let history = useHistory();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("http://localhost:3000/login", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username: username,
-        password: password,
-      }),
+
+    const userCredentials = {
+      username: username,
+      password: password,
+    }
+
+    client('login', {body: userCredentials}).then( data => {
+
+      if (data.jwt) {
+        localStorage.jwt = data.jwt;
+        localStorage.username = data.user.username;
+        localStorage.id = data.user.id;
+       
+        window.location.reload();
+      }
+
     })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.jwt) {
-          localStorage.jwt = data.jwt;
-          localStorage.username = data.user.username;
-          localStorage.id = data.user.id;
-          // PUSH TO THE HOME ROUTE
-         
-          window.location.reload();
-        }
-      });
+
   };
 
   return (

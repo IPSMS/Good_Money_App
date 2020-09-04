@@ -6,15 +6,18 @@ import CompleteButton from "../components/CompleteButton";
 import { makeStyles } from "@material-ui/core/styles";
 
 // Material UI imports
-import { Grid, Typography, Box, Container } from "@material-ui/core/";
+import { Typography, Box, Container } from "@material-ui/core/";
 
 // Router
 import { Redirect } from "react-router-dom";
 
+// Util
+import { client } from "../functions/client.js";
+
 // Styles Object
 const useStyles = makeStyles((theme) => ({
   buttonContainer: {
-    marginTop: "5rem",
+    marginTop: "2rem",
     textAlign: "center",
   },
   dailyTotal: {
@@ -22,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "center",
     fontSize: "60px",
     color: "#00D01B",
-    marginBottom: "3.5rem",
+    marginBottom: "1.5rem",
   },
   grandTotalBox: {
     display: "inline-block",
@@ -39,11 +42,11 @@ const useStyles = makeStyles((theme) => ({
   },
   grandTotalWrapper: {
     textAlign: "center",
-    marginTop: "3rem",
+    marginTop: "1.5rem",
   },
   dailyTotalHeading: {
     fontWeight: "bold",
-    marginBottom: "1.5rem",
+    marginBottom: "1rem",
   },
 }));
 
@@ -54,59 +57,41 @@ export default function Home() {
   const [userDailyTotal, setUserDailyTotal] = useState(0);
   const [userName, setUserName] = useState("");
 
-  fetch("http://localhost:3000/profile", {
-    headers: {
-      Authorization: `Bearer ${localStorage.jwt}`,
-    },
+  client('profile').then( user => {
+    if (!user.error) {
+      setUserName(user.username);
+    }
   })
-    .then((res) => res.json())
-    .then((user) => {
-      if (!user.error) {
-        setUserName(user.username);
-      }
-    });
 
-  fetch("http://localhost:3000/usertotal/:id", {
-    headers: {
-      Authorization: `Bearer ${localStorage.jwt}`,
-    },
+  client('usertotal/:id').then( data => {
+    setUserTotal(data);
   })
-    .then((res) => res.json())
-    .then((data) => {
-      setUserTotal(data);
-    });
 
-  fetch("http://localhost:3000/userdailytotal/:id", {
-    headers: {
-      Authorization: `Bearer ${localStorage.jwt}`,
-    },
+  client('userdailytotal/:id').then( data => {
+    setUserDailyTotal(data);
   })
-    .then((res) => res.json())
-    .then((data) => {
-      setUserDailyTotal(data);
-    });
 
   if( !userName ){
     return <Redirect to="/" />
   }
 
   return (
-    <Grid container direction="column" justify="center">
+    <Container maxWidth="sm">
       <AppBar userName={userName} />
-      <Grid item md={12} justify="center" className={classes.grandTotalWrapper}>
+      <Box item md={12} justify="center" className={classes.grandTotalWrapper}>
         <Typography variant="h5" className={classes.grandTotalTitle}>
           GRAND TOTAL:
         </Typography>
         <Box className={classes.grandTotalBox}>
           <span>{"$" + userTotal}</span>
         </Box>
-      </Grid>
-      <Grid item md={12} className={classes.buttonContainer}>
-        <Typography variant="h3" className={classes.dailyTotalHeading}>
+      </Box>
+      <Box item md={12} className={classes.buttonContainer}>
+        <Typography variant="h4" className={classes.dailyTotalHeading}>
           DAILY EARNINGS:
         </Typography>
 
-        <Typography variant="h4" className={classes.dailyTotal}>
+        <Typography variant="h5" className={classes.dailyTotal}>
           {"$" + userDailyTotal}
         </Typography>
 
@@ -114,7 +99,7 @@ export default function Home() {
           setUserDailyTotal={setUserDailyTotal}
           userDailyTotal={userDailyTotal}
         />
-      </Grid>
-    </Grid>
+      </Box>
+    </Container>
   );
 }

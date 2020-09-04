@@ -7,14 +7,11 @@ import Appbar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
-import MenuItem from "@material-ui/core/MenuItem";
-import Menu from "@material-ui/core/Menu";
 import Typography from "@material-ui/core/Typography";
 import MenuIcon from "@material-ui/icons/Menu";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import MailIcon from "@material-ui/icons/Mail";
-import { getThemeProps } from "@material-ui/styles";
 
 // Styles object
 const useStyles = makeStyles((theme) => ({
@@ -29,6 +26,11 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "Rowdies",
     marginLeft: "5%",
     width: "100%",
+  },
+  appBarIcons: {
+    [theme.breakpoints.down("sm")]: {
+      display: "none",
+    },
   },
 }));
 
@@ -53,7 +55,6 @@ export default function AppBar(props) {
               </Grid>
               <Grid item>
                 <Typography
-                  className={classes.title}
                   variant="h4"
                   noWrap
                   className={classes.appName}
@@ -68,7 +69,7 @@ export default function AppBar(props) {
               <Grid item>
                 <LogoutButton />
               </Grid>
-              <Grid item>
+              <Grid item className={classes.appBarIcons}>
                 <IconButton
                   edge="end"
                   aria-label="account of current user"
@@ -80,7 +81,7 @@ export default function AppBar(props) {
                   <MailIcon />
                 </IconButton>
               </Grid>
-              <Grid item>
+              <Grid item className={classes.appBarIcons}>
                 <IconButton
                   edge="end"
                   aria-label="account of current user"

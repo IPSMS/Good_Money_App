@@ -36,7 +36,7 @@ class User < ApplicationRecord
             return total
         else
             self.stats.each do |stat|
-                if stat.logged_time == Date.today.strftime("%m-%d-%Y")
+                if stat.logged_time == DateTime.now.strftime("%m-%d-%Y")
                     total += stat.action_amount
                 else
                     total = 0

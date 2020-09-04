@@ -1,18 +1,17 @@
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
 
 // To create the styles object
 import { makeStyles } from "@material-ui/core/styles";
 
 // Material UI imports
 import {
-  Grid,
   Container,
   Typography,
   TextField,
   Button,
   Box,
 } from "@material-ui/core";
+import { client } from "../functions/client";
 
 // Styles Object
 const useStyles = makeStyles((theme) => ({
@@ -30,7 +29,6 @@ const useStyles = makeStyles((theme) => ({
     display: "inline-block",
   },
   formInputs__submit: {
-    marginTop: "1rem",
     color: "#fff",
     marginTop: "1rem",
     fontWeight: "bold",
@@ -58,7 +56,6 @@ const useStyles = makeStyles((theme) => ({
 export default function Signup() {
   // Variable to enable ease of use of stlyes object
   const classes = useStyles();
-  const history = useHistory();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [username, setUsername] = useState("");
@@ -68,31 +65,24 @@ export default function Signup() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch("http://localhost:3000/signup", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        first_name: firstName,
-        last_name: lastName,
-        username: username,
-        password: password,
-        password_confirmation: passwordConfirmation,
-      }),
+    const newUserObj = {
+      first_name: firstName,
+      last_name: lastName,
+      username: username,
+      password: password,
+      password_confirmation: passwordConfirmation,
+    }
+
+    client('signup', {body: newUserObj}).then( data =>{
+      if (data.jwt) {
+        
+        localStorage.jwt = data.jwt;
+        localStorage.username = data.user.username;
+        localStorage.id = data.user.id;
+       
+        window.location.reload();
+      }
     })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.jwt) {
-          console.log(data);
-          localStorage.jwt = data.jwt;
-          localStorage.username = data.user.username;
-          localStorage.id = data.user.id;
-          // PUSH TO THE HOME ROUTE
-          window.location.reload();
-        }
-      });
   };
 
   return (

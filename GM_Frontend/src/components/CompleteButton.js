@@ -2,23 +2,36 @@ import React from "react";
 
 // Material ui imports
 import { makeStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
-import { getThemeProps } from "@material-ui/styles";
+
+// Utils
+import { client } from "../functions/client.js";
 
 const useStyles = makeStyles((theme) => ({
   button: {
     color: "white",
+    backgroundColor: theme.palette.secondary.main,
     borderRadius: "50%",
-    width: "400px",
-    height: "400px",
-    fontSize: "40px",
+    width: "300px",
+    fontSize: "2rem",
     fontFamily: "Roboto",
     fontWeight: "bold",
-    filter: "drop-shadow(3px 7px 8px #7e7e7e)",
-    border: "15px solid #00a015",
-    "&:hover": {
-      border: "10px solid #599634",
+    filter: "drop-shadow(0px 20px 0px #00690e)",
+    border: "1px solid #00a015",
+    display: "flex",
+    justifyContent: "center",
+    marginLeft: "auto",
+    marginRight: "auto",
+    alignItems: "center",
+    height: "300px",
+    "&:active": {
+      filter: "drop-shadow(0px 10px 0px #001703)",
+      transform: "translateY(4px)",
+      backgroundColor: "#00a916",
     },
+  },
+
+  completeTxt: {
+    display: "block",
   },
 }));
 
@@ -35,36 +48,27 @@ export default function CompleteButton(props) {
     if (date[1] === "-") {
       todayDate = "0" + date;
     }
-    fetch("http://localhost:3000/stats", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.jwt}`,
-      },
-      body: JSON.stringify({
-        action_amount: 1,
-        user_id: localStorage.id,
-        logged_time: todayDate,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(todayDate);
-        if (!data.error) {
-          props.setUserDailyTotal(props.userDailyTotal + 1);
-        }
-      });
+
+    if (todayDate[4] === "-") {
+      todayDate = todayDate.substring(0, 3) + "0" + todayDate.substring(3);
+    }
+
+    const statsObj = {
+      action_amount: 1,
+      user_id: localStorage.id,
+      logged_time: todayDate,
+    };
+
+    client("stats", { body: statsObj }).then((data) => {
+      if (!data.error) {
+        props.setUserDailyTotal(props.userDailyTotal + 1);
+      }
+    });
   };
 
   return (
-    <Button
-      variant="contained"
-      color="secondary"
-      className={classes.button}
-      onClick={handleClick}
-    >
-      COMPLETE!
-    </Button>
+    <div className={classes.button} onClick={handleClick}>
+      <span className={classes.completeTxt}>COMPLETE!</span>
+    </div>
   );
 }
