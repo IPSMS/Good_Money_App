@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 
 // To create the styles object
 import { makeStyles } from "@material-ui/core/styles";
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 // Material UI imports
-import { Button } from "@material-ui/core/";
 
 // Util
 import { logout } from "../functions/client.js"
@@ -24,16 +24,16 @@ export default function LogoutButton() {
 
   return (
     <Link to="/" className={classes.logoutLink}>
-      <Button
-        variant="outlined"
-        color="secondary"
+      <a
+        href="#"
+        
         className={classes.button}
         onClick={() => {
           logout();
         }}
       >
-        Logout
-      </Button>
+        <ExitToAppIcon color="secondary" />
+      </a>
     </Link>
   );
 }

@@ -21,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     marginLeft: "auto",
     marginRight: "auto",
+    marginBottom: "2rem",
     alignItems: "center",
     height: "300px",
     "&:active": {

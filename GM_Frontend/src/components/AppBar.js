@@ -62,9 +62,7 @@ export default function AppBar(props) {
           </div>
           <div>
             <Grid container alignItems="center" spacing={3}>
-              <Grid item>
-                <LogoutButton />
-              </Grid>
+              
               <Grid item className={classes.appBarIcons}>
                 <IconButton
                   edge="end"
@@ -108,6 +106,9 @@ export default function AppBar(props) {
                     >
                       <AccountCircle />
                     </IconButton>
+                  </Grid>
+                  <Grid item spacing={3}>
+                    <LogoutButton />
                   </Grid>
                 </Grid>
               </Grid>
