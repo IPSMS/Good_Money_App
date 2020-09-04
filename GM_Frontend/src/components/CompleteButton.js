@@ -3,6 +3,9 @@ import React from "react";
 // Material ui imports
 import { makeStyles } from "@material-ui/core/styles";
 
+// Utils
+import { client } from "../functions/client.js";
+
 const useStyles = makeStyles((theme) => ({
   button: {
     color: "white",
@@ -45,26 +48,19 @@ export default function CompleteButton(props) {
     if (date[1] === "-") {
       todayDate = "0" + date;
     }
-    fetch("http://localhost:3000/stats", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.jwt}`,
-      },
-      body: JSON.stringify({
-        action_amount: 1,
-        user_id: localStorage.id,
-        logged_time: todayDate,
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(todayDate);
-        if (!data.error) {
-          props.setUserDailyTotal(props.userDailyTotal + 1);
-        }
-      });
+
+    const statsObj = {
+      action_amount: 1,
+      user_id: localStorage.id,
+      logged_time: todayDate,
+    }
+
+    client('stats', {body: statsObj}).then( data => {
+      if (!data.error) {
+        props.setUserDailyTotal(props.userDailyTotal + 1);
+      }
+    } )
+
   };
 
   return (

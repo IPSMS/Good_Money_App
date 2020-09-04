@@ -11,6 +11,9 @@ import { Typography, Box, Container } from "@material-ui/core/";
 // Router
 import { Redirect } from "react-router-dom";
 
+// Util
+import { client } from "../functions/client.js";
+
 // Styles Object
 const useStyles = makeStyles((theme) => ({
   buttonContainer: {
@@ -54,37 +57,19 @@ export default function Home() {
   const [userDailyTotal, setUserDailyTotal] = useState(0);
   const [userName, setUserName] = useState("");
 
-  fetch("http://localhost:3000/profile", {
-    headers: {
-      Authorization: `Bearer ${localStorage.jwt}`,
-    },
+  client('profile').then( user => {
+    if (!user.error) {
+      setUserName(user.username);
+    }
   })
-    .then((res) => res.json())
-    .then((user) => {
-      if (!user.error) {
-        setUserName(user.username);
-      }
-    });
 
-  fetch("http://localhost:3000/usertotal/:id", {
-    headers: {
-      Authorization: `Bearer ${localStorage.jwt}`,
-    },
+  client('usertotal/:id').then( data => {
+    setUserTotal(data);
   })
-    .then((res) => res.json())
-    .then((data) => {
-      setUserTotal(data);
-    });
 
-  fetch("http://localhost:3000/userdailytotal/:id", {
-    headers: {
-      Authorization: `Bearer ${localStorage.jwt}`,
-    },
+  client('userdailytotal/:id').then( data => {
+    setUserDailyTotal(data);
   })
-    .then((res) => res.json())
-    .then((data) => {
-      setUserDailyTotal(data);
-    });
 
   if( !userName ){
     return <Redirect to="/" />

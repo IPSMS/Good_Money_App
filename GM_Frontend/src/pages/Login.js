@@ -6,6 +6,9 @@ import { Link, useHistory } from "react-router-dom";
 // To create the styles object
 import { makeStyles } from "@material-ui/core/styles";
 
+// Utils
+import { client } from "../functions/client.js";
+
 // Material UI imports
 import {
   Grid,
@@ -67,28 +70,24 @@ export default function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("http://localhost:3000/login", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username: username,
-        password: password,
-      }),
+
+    const userCredentials = {
+      username: username,
+      password: password,
+    }
+
+    client('login', {body: userCredentials}).then( data => {
+
+      if (data.jwt) {
+        localStorage.jwt = data.jwt;
+        localStorage.username = data.user.username;
+        localStorage.id = data.user.id;
+       
+        window.location.reload();
+      }
+
     })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.jwt) {
-          localStorage.jwt = data.jwt;
-          localStorage.username = data.user.username;
-          localStorage.id = data.user.id;
-          // PUSH TO THE HOME ROUTE
-         
-          window.location.reload();
-        }
-      });
+
   };
 
   return (

@@ -13,6 +13,7 @@ import {
   Button,
   Box,
 } from "@material-ui/core";
+import { client } from "../functions/client";
 
 // Styles Object
 const useStyles = makeStyles((theme) => ({
@@ -68,31 +69,24 @@ export default function Signup() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch("http://localhost:3000/signup", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        first_name: firstName,
-        last_name: lastName,
-        username: username,
-        password: password,
-        password_confirmation: passwordConfirmation,
-      }),
+    const newUserObj = {
+      first_name: firstName,
+      last_name: lastName,
+      username: username,
+      password: password,
+      password_confirmation: passwordConfirmation,
+    }
+
+    client('signup', {body: newUserObj}).then( data =>{
+      if (data.jwt) {
+        
+        localStorage.jwt = data.jwt;
+        localStorage.username = data.user.username;
+        localStorage.id = data.user.id;
+       
+        window.location.reload();
+      }
     })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.jwt) {
-          console.log(data);
-          localStorage.jwt = data.jwt;
-          localStorage.username = data.user.username;
-          localStorage.id = data.user.id;
-          // PUSH TO THE HOME ROUTE
-          window.location.reload();
-        }
-      });
   };
 
   return (
