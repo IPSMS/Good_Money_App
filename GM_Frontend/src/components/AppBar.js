@@ -43,7 +43,7 @@ export default function AppBar(props) {
         <Toolbar className={classes.toolbar}>
           <div>
             <Grid container>
-              <Grid item>
+              <Grid item className={classes.appBarIcons}>
                 <IconButton
                   edge="start"
                   className={classes.menuButton}
@@ -54,11 +54,7 @@ export default function AppBar(props) {
                 </IconButton>
               </Grid>
               <Grid item>
-                <Typography
-                  variant="h4"
-                  noWrap
-                  className={classes.appName}
-                >
+                <Typography variant="h4" noWrap className={classes.appName}>
                   GM
                 </Typography>
               </Grid>

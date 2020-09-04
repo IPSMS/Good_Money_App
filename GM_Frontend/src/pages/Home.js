@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 import AppBar from "../components/AppBar";
 import CompleteButton from "../components/CompleteButton";
 
@@ -57,49 +57,56 @@ export default function Home() {
   const [userDailyTotal, setUserDailyTotal] = useState(0);
   const [userName, setUserName] = useState("");
 
-  client('profile').then( user => {
+  client("profile").then((user) => {
     if (!user.error) {
       setUserName(user.username);
     }
-  })
+  });
 
-  client('usertotal/:id').then( data => {
+  client("usertotal/:id").then((data) => {
     setUserTotal(data);
-  })
+  });
 
-  client('userdailytotal/:id').then( data => {
+  client("userdailytotal/:id").then((data) => {
     setUserDailyTotal(data);
-  })
+  });
 
-  if( !userName ){
-    return <Redirect to="/" />
+  if (!userName) {
+    return <Redirect to="/" />;
   }
 
   return (
-    <Container maxWidth="sm">
+    <Fragment>
       <AppBar userName={userName} />
-      <Box item md={12} justify="center" className={classes.grandTotalWrapper}>
-        <Typography variant="h5" className={classes.grandTotalTitle}>
-          GRAND TOTAL:
-        </Typography>
-        <Box className={classes.grandTotalBox}>
-          <span>{"$" + userTotal}</span>
+      <Container maxWidth="sm">
+        <Box
+          item
+          md={12}
+          justify="center"
+          className={classes.grandTotalWrapper}
+        >
+          <Typography variant="h5" className={classes.grandTotalTitle}>
+            GRAND TOTAL:
+          </Typography>
+          <Box className={classes.grandTotalBox}>
+            <span>{"$" + userTotal}</span>
+          </Box>
         </Box>
-      </Box>
-      <Box item md={12} className={classes.buttonContainer}>
-        <Typography variant="h4" className={classes.dailyTotalHeading}>
-          DAILY EARNINGS:
-        </Typography>
+        <Box item md={12} className={classes.buttonContainer}>
+          <Typography variant="h4" className={classes.dailyTotalHeading}>
+            DAILY EARNINGS:
+          </Typography>
 
-        <Typography variant="h5" className={classes.dailyTotal}>
-          {"$" + userDailyTotal}
-        </Typography>
+          <Typography variant="h5" className={classes.dailyTotal}>
+            {"$" + userDailyTotal}
+          </Typography>
 
-        <CompleteButton
-          setUserDailyTotal={setUserDailyTotal}
-          userDailyTotal={userDailyTotal}
-        />
-      </Box>
-    </Container>
+          <CompleteButton
+            setUserDailyTotal={setUserDailyTotal}
+            userDailyTotal={userDailyTotal}
+          />
+        </Box>
+      </Container>
+    </Fragment>
   );
 }
