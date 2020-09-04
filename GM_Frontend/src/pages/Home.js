@@ -6,7 +6,7 @@ import CompleteButton from "../components/CompleteButton";
 import { makeStyles } from "@material-ui/core/styles";
 
 // Material UI imports
-import { Grid, Typography, Box, Container } from "@material-ui/core/";
+import { Typography, Box, Container } from "@material-ui/core/";
 
 // Router
 import { Redirect } from "react-router-dom";
